@@ -1,0 +1,97 @@
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+body{
+  background-color: rgba(27,31,34,0.85);
+}
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+.topnav {
+  background-color: #333;
+  overflow:hidden;
+}
+.topnav a{
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+.topnav a:hover {
+  background: #ddd;
+  color:black;
+}
+.topnav a.active{
+  background-color: #ddd;
+  color: white;
+}
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+h1{
+  color: white;
+  font-size: 2.1rem;
+  line-height: 1.4;
+  font-family:verdana;
+  text-align: center;
+  text-shadow: 2px 2px 4px #000000;
+}
+@keyframes slider {
+   0%{background-image:  url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome.jpg')}
+   12%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome1.jpg')}
+   35%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome2.jpg')}
+   55%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome3.jpg')}
+   75%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome4.jpg')}
+   85%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome5.webp')}
+}
+.slideshow-container{
+  width: 90%;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top:  63%;
+  transform: translate(-50%, -50%);
+  background: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome.jpg');
+  background-size: 100% 100%;
+  box-shadow: 1px 2px 10px 5px white;
+  animation: slider 9s infinite linear;
+}
