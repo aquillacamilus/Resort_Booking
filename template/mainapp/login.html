@@ -11,10 +11,11 @@
   <body>
       <div class="container">
         <img src="{% static "images/loginimage.png" %}"/>
-        <form>
+        <form action="{% url 'mainapp:home' %}" method="post">
+          {% csrf_token %}
           <div class="form-input">
-          <label for="email"><b>Email</b></label>
-          <input type="text" name="username" placeholder="enter email">
+          <label for="username"><b>User Name</b></label>
+          <input type="text" name="username" placeholder="enter User Name">
           </div>
           <div class="form-input">
             <label for="password"><b>Password</b></label>
