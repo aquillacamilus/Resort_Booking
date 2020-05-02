@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+  <body>
+    <nav  class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'mainapp:home' %}">Home<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <a href="#">
+        <span href="" class="navbar-text">
+          Logout
+        </span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="container">
+      {% if messages %}
+      {% for message in messages %}
+        {% if message.tags == 'success' %}
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% else %}
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endif %}
+
+      {% endfor %}
+    {% endif %}
+      <div style="padding-top: 2em;padding-bottom: 2em;" class="row row-cols-lg-4 row-cols-md-3 row-cols-sm-2">
+        {% for obj in objects %}
+        <div class="card col mb-3 customcard" style="padding-bottom: 1em;box-shadow: inset 0 0 1rem rgba(0, 0, 0, .85);">
+          <img src="{{ obj.resortname.picurl }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{ obj.resortname.name }}</h5>
+            <strong>Date : </strong>{{ obj.bookDate }}<br>
+            <strong>Adults : </strong>{{ obj.adult }}
+            <strong>Children : </strong>{{ obj.child }}<br>
+            <strong>Total : </strong>{{ obj.total }}
+            <div class="row" style="padding-top: .75em;">
+                    <div class="" style="padding-left: 1em;">
+                      <a type="button" class="btn btn-warning" href="{% url 'mainapp:update' pk=obj.id %}">Update</a>
+                    </div>
+                    <div class="" style="padding-left: 2.5em;">
+                      <form action="{% url 'mainapp:delPage' pk=obj.id %}" method="post">
+                        {% csrf_token %}
+                        <input type="submit" onclick="return confirm('Are you sure to delete?')" class="btn btn-danger" value="Delete">
+                      </form>
+                    </div>
+                  </div>
+          </div>
+        </div>
+        {% endfor %}
+
+
+      </div>
+
+    </div>
+    <script type="text/javascript">
+      var headOne = document.querySelector('#addstock')
+
+      // Hover (mouseover and mouseout)
+      headOne.addEventListener('mouseover',function(){
+        headOne.classList.add("blueshadow");
+        headOne.classList.remove("blackshadow");
+      })
+
+      headOne.addEventListener('mouseout',function(){
+        headOne.classList.add("blackshadow");
+        headOne.classList.remove("blueshadow");
+      })
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+  </body>
+</html>

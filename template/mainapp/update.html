@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  </head>
+  <body onload="finalCost()">
+    <nav  class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'mainapp:home' %}">Home<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <a href="#">
+        <span href="" class="navbar-text">
+          Logout
+        </span>
+        </a>
+      </div>
+    </nav>
+    <div class="cotainer">
+      <div class="jumbotron">
+        <form class="" action="{% url 'mainapp:update' pk=object.id %}" method="post">
+          {% csrf_token %}
+          <div class="form-group">
+              <label>Reservation Date</label>
+              <input type="date" name="date" value="{{ date }}">
+          </div>
+          <div class="form-group">
+              <label>Number of persons</label>
+              <select class="form-control" id="person_number"  name="adult" onchange="finalCost()">
+                {% for i in lst %}
+                  {% if i == object.adult %}
+                    <option value="{{ i }}" selected> {{ i }} </option>
+                  {% else %}
+                    <option value="{{ i }}"> {{ i }} </option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+          </div>
+          <div class="form-group">
+              <label>Number of children</label>
+              <select class="form-control" id="child_number" value="{{ object.child }}" name="child" onchange="finalCost()">
+                {% for i in lst %}
+                  {% if i == object.child %}
+                    <option value="{{ i }}" selected> {{ i }} </option>
+                  {% else %}
+                    <option value="{{ i }}"> {{ i }} </option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+          </div>
+          <br>
+          <div class="form-group">
+              <label>Total Cost (Rs) : </label>
+              <span id="result" style="background-color: #7527b0;color: #fff;padding: 6px 70px;font-weight: 600;font-size: 18px; margin-left: 10px;border-radius: 5px;">0</span>
+          </div>
+          <p style="text-align: center;">
+            <input class="btn btn-success" type="submit" name="" value="Confirm Reservation">
+          </p>
+        </form>
+      </div>
+
+    </div>
+    <script>
+        function finalCost(){
+            //var resortName=document.getElementById("resortName").value;
+            //var roomType = document.getElementById("room_type").value;
+            //var roomNum = document.getElementById("room_number").value;
+            var personNum = document.getElementById("person_number").value;
+            var childNum = document.getElementById("child_number").value;
+            //var resFacilities = document.getElementById("res_facilities").value;
+
+            var total = ((personNum)*{{ object.resortname.adult }}) + ((childNum)*{{ object.resortname.child }})
+            document.getElementById("result").innerHTML = total;
+        }
+    </script>
+  </body>
+</html>

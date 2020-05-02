@@ -7,72 +7,72 @@
 
     <script>
         function finalCost(){
-            var resortName=document.getElementById("resortName").value;
-            var roomType = document.getElementById("room_type").value;
-            var roomNum = document.getElementById("room_number").value;
+            //var resortName=document.getElementById("resortName").value;
+            //var roomType = document.getElementById("room_type").value;
+            //var roomNum = document.getElementById("room_number").value;
             var personNum = document.getElementById("person_number").value;
             var childNum = document.getElementById("child_number").value;
-            var resFacilities = document.getElementById("res_facilities").value;
+            //var resFacilities = document.getElementById("res_facilities").value;
 
-            var total = (parseInt(roomType)*500) +((resortName)*100)+ ((roomNum)*20) + ((personNum)*20) + ((childNum)*30) + ((resFacilities)*30)
-
+            var total = ((personNum)*{{ object.adult }}) + ((childNum)*{{ object.child }})
             document.getElementById("result").innerHTML = total;
         }
     </script>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
 </head>
 <body>
-  <div class="topnav">
-    <a  class="" href="#submit">SUBMIT</a>
-    <a href="#login">LOGOUT</a>
-</div>
-  <div class="slideshow-container">
+  <nav  class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'mainapp:home' %}">Home<span class="sr-only">(current)</span></a>
+        </li>
+      </ul>
+      <a href="#">
+      <span href="" class="navbar-text">
+        Logout
+      </span>
+      </a>
+    </div>
+  </nav>
+
+    <div class="container">
+      <div class="slideshow-container">
+        {% if messages %}
+        {% for message in messages %}
+          {% if message.tags == 'success' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% else %}
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ message }}
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          {% endif %}
+
+        {% endfor %}
+      {% endif %}
 
      <div class="hotel_reserve_box">
-         <h3> Resort Reservation Form </h3><br>
-         <form>
-           <div class="form-group">
-             <label>Resort Names</label>
-             <select class="form-control" id="resortName" onchange="finalCost()">
-               <option value="0"selected>select resort</option>
-               <option value="1">Summer Sand Beach</option>
-               <option value="2">River View Resort</option>
-               <option value="3">River Roost Resort</option>
-               <option value="4">Amche Ghar Resort</option>
-               <option value="5">Red Rock Resorts</option>
-             </select>
+         <h3> {{ object.name }} </h3><br>
+         <form action="{% url 'mainapp:reservation' pk=object.id %}" method="post">
+           {% csrf_token %}
 
-           </div>
              <div class="form-group">
-                 <label>Room/Suite Type</label>
-                 <select class="form-control" id="room_type" onchange="finalCost()">
-                     <option value="0" selected>Select Room/Suite </option>
-                     <option value="1"> Standard </option>
-                     <option value="2"> Deluxe </option>
-                     <option value="3"> Superior Deluxe </option>
-                     <option value="4"> Premier Deluxe  </option>
-                     <option value="5"> Executive Suite </option>
-                     <option value="6"> Junior Suite </option>
-                     <option value="7"> Honeymoon Suite </option>
-                 </select>
-             </div>
-             <div class="form-group">
-                 <label>Number of room/suite</label>
-                 <select class="form-control" id="room_number" onchange="finalCost()">
-                     <option value="0"> 0 </option>
-                     <option value="1"> 1 </option>
-                     <option value="2"> 2 </option>
-                     <option value="3"> 3 </option>
-                     <option value="4"> 4 </option>
-                     <option value="5"> 5 </option>
-                     <option value="6"> 6 </option>
-                     <option value="7"> 7 </option>
-                 </select>
+                 <label>Reservation Date</label>
+                 <input type="date" name="date" value="">
              </div>
              <div class="form-group">
                  <label>Number of persons</label>
-                 <select class="form-control" id="person_number" onchange="finalCost()">
+                 <select class="form-control" id="person_number" name="adult" onchange="finalCost()">
                      <option value="0"> 0 </option>
                      <option value="1"> 1 </option>
                      <option value="2"> 2 </option>
@@ -85,7 +85,7 @@
              </div>
              <div class="form-group">
                  <label>Number of children</label>
-                 <select class="form-control" id="child_number" onchange="finalCost()">
+                 <select class="form-control" id="child_number" name="child" onchange="finalCost()">
                      <option value="0"> 0 </option>
                      <option value="1"> 1 </option>
                      <option value="2"> 2 </option>
@@ -96,20 +96,22 @@
                      <option value="7"> 7 </option>
                  </select>
              </div>
-             <div class="form-group">
-                 <label>Resort facilities?</label>
-                 <select class="form-control" id="res_facilities" onchange="finalCost()">
-                     <option value="0" selected> Do you want restaurant facilities? </option>
-                     <option value="2"> Yes </option>
-                     <option value="0"> No </option>
-                 </select>
-             </div><br>
+             <br>
              <div class="form-group">
                  <label>Total Cost (Rs) : </label>
                  <span id="result" style="background-color: #7527b0;color: #fff;padding: 6px 70px;font-weight: 600;font-size: 18px; margin-left: 10px;border-radius: 5px;">0</span>
              </div>
+             <p style="text-align: center;">
+               <input class="btn btn-success" type="submit" name="" value="Confirm Reservation">
+             </p>
+
          </form>
      </div>
   </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  
 </body>
 </html>

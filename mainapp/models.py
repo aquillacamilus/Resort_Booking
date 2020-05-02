@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Resorts(models.Model):
@@ -17,3 +18,11 @@ class Resorts(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+class ReservationModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user')
+    bookDate = models.DateField()
+    adult = models.IntegerField()
+    child = models.IntegerField()
+    resortname = models.ForeignKey(Resorts, on_delete=models.CASCADE, related_name='resortname')
+    total = models.IntegerField()

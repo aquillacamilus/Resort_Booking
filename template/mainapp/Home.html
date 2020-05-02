@@ -4,16 +4,34 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
     <link rel="stylesheet" href="{% static "css/Home.css" %}">
   </head>
   <body>
+    <nav  class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'mainapp:home' %}">Home<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'mainapp:mybookings' %}">My Bookings </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
     <h1>WELCOME TO MAKE MY HAPPY TOUR</h1>
-       <ol>
-      <li><a href="{% url 'mainapp:update' pk=stock|ind:7 %}">Summer Sand Beach Resort</a></li>
-      <li><a href="#">River View Resort</a></li>
-      <li><a href="#">River Roost Resort</a> </li>
-      <li><a href="#">Amche Ghar Resort</a></li>
-      <li><a href="#">Red Rock Resorts</a></li>
+    <ol>
+    {% for obj in objects %}
+      <li><a href="{% url 'mainapp:details' pk=obj.id %}">{{ obj.name }}</a></li>
+    {% endfor %}
     </ol>
   </body>
 </html>
