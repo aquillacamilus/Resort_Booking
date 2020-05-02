@@ -14,8 +14,8 @@
             <a class="nav-link" href="{% url 'mainapp:home' %}">Home<span class="sr-only">(current)</span></a>
           </li>
         </ul>
-        <a href="#">
-        <span href="" class="navbar-text">
+        <a href="{% url 'logout' %}">
+        <span href="{% url 'logout' %}" class="navbar-text">
           Logout
         </span>
         </a>
