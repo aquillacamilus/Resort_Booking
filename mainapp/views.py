@@ -3,11 +3,13 @@ from .forms import UserForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
 from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate
 # Create your views here.
 def welcome(req):
     return render(req,'mainapp/welcome.html')
 
+@login_required
 def home(req):
     return render(req,'mainapp/Home.html')
 
