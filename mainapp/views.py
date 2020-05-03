@@ -119,7 +119,7 @@ def ulogin(request):
         if user:
             if user.is_active:
                 login(request,user)
-                return HttpResponseRedirect(reverse('welcome'))
+                return HttpResponseRedirect(reverse('mainapp:home'))
             else:
                 return HttpResponse("Your account is not active.")
         else:

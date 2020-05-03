@@ -21,7 +21,7 @@
                 {% endfor %}
               {% endif %}
         <img src="{% static "images/loginimage.png" %}"/>
-        <form action="{% url 'mainapp:home' %}" method="post">
+        <form action="{% url 'mainapp:login' %}" method="post">
           {% csrf_token %}
           <div class="form-input">
           <label for="username"><b>User Name</b></label>
@@ -32,7 +32,6 @@
           <input type="password" name="password" placeholder="enter password">
           </div>
           <input type="submit" name="submit" value="LOGIN" class="btn-username"><br/>
-          <a href="#">Forget your passsword?</a>
         </form>
       </div>
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
