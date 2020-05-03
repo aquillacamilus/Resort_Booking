@@ -90,7 +90,7 @@ h1{
   left: 50%;
   top:  63%;
   transform: translate(-50%, -50%);
-  background: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\welcome.jpg');
+  background: url('..\\images\\welcome.jpg');
   background-size: 100% 100%;
   box-shadow: 1px 2px 10px 5px white;
   animation: slider 9s infinite linear;
