@@ -83,12 +83,12 @@ h1{
   text-shadow: 2px 2px 4px #000000;
 }
 @keyframes slider {
-   0%{background-image:  url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\res1.jpg')}
-   12%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\res2.jpg')}
-   35%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\res3.jpg')}
-   55%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\res4.jpg')}
-   75%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\res5.jpg')}
-   85%{background-image: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\res6.jpg')}
+   0%{background-image:  url('..\\images\\res1.jpg')}
+   12%{background-image: url('..\\images\\res2.jpg')}
+   35%{background-image: url('..\\images\\res3.jpg')}
+   55%{background-image: url('..\\images\\res4.jpg')}
+   75%{background-image: url('..\\images\\res5.jpg')}
+   85%{background-image: url('..\\images\\res6.jpg')}
 }
 .slideshow-container{
   width: 100%;
@@ -97,7 +97,7 @@ h1{
   left: 50%;
   top:  50%;
   transform: translate(-50%, -50%);
-  background: url('C:\\Users\\user\\Desktop\\Resorts\\Django\\first_page\\static\\images\\res1.jpg');
+  background: url('..\\images\\res1.jpg');
   background-size: 100% 100%;
   box-shadow: 1px 2px 10px 5px white;
   animation: slider 12s infinite linear;
