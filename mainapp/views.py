@@ -101,6 +101,7 @@ def signup(req):
         user_form = UserForm(data=req.POST)
         if user_form.is_valid():
             user = user_form.save()
+            user.set_password(user.password)
             user.save()
             return HttpResponseRedirect(reverse('mainapp:login'))
         else:
